@@ -34,11 +34,11 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-    <Router>
-      <>
-        <Navbar />
-        <Routes>
-          <Route 
+      <Router>
+        <>
+          <Navbar />
+          <Routes>
+            <Route 
             path='/' 
             element={<SearchBooks />} 
           />
