@@ -17,27 +17,30 @@ const resolvers = {
     Mutation: {
         addUser : async (parent, { username, email, password }) => {
             const user = await User.create({ username, email, password });
+            console.log(user)
             const token = signToken(user);
-
+            console.log(token)
             return { token, user };
         },
 
         login : async (parent, { email, password }) => {
             const user = await User.find({ email });
-
+            console.log(user)
             if (!user) {
                 throw new AuthenticationError('No user with this email!');
             };
 
-            const correctPw = await User.isCorrectPassword(password)
-
+            const correctPw = await user[0].isCorrectPassword(password)
+            console.log(correctPw)
             if (!correctPw) {
                 throw new AuthenticationError('Incorrect Password!');
             };
 
-            const token = signToken(user);
+            const token = signToken(user[0]);
 
-            return { user, token }
+            const user1 = user[0]
+
+            return  { user1, token }
         },
 
         saveBook: async (parent, { book }, context) => {
